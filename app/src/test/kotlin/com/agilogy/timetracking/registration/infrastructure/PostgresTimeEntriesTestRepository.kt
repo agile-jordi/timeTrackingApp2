@@ -11,7 +11,7 @@ context(DataSource)
 class PostgresTimeEntriesTestRepository {
 
     suspend fun getAll(): List<TimeEntry> = sql {
-        select("SELECT user_name, project_name, start, end FROM time_entries") {
+        select("""SELECT user_name, project_name, start, "end" FROM time_entries""") {
             TimeEntry(UserName(string(1)!!), ProjectName(string(2)!!), timestamp(3)!!, timestamp(4)!!)
         }
     }
