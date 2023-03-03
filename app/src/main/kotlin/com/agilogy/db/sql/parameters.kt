@@ -13,25 +13,25 @@ import java.sql.Timestamp
 import java.sql.Types
 import java.time.Instant
 
-val Boolean?.param: SqlParameter get() = { ps, pos -> this@param?.let { ps.setBoolean(pos, it) } ?: ps.setNull(pos, Types.BOOLEAN) }
-val Byte?.param: SqlParameter get() = { ps, pos -> this@param?.let { ps.setByte(pos, it) } ?: ps.setNull(pos, Types.TINYINT) }
-val Short?.param: SqlParameter get() = { ps, pos -> this@param?.let { ps.setShort(pos, it) } ?: ps.setNull(pos, Types.SMALLINT) }
-val Int?.param: SqlParameter get() = { ps, pos -> this@param?.let { ps.setInt(pos, it) } ?: ps.setNull(pos, Types.INTEGER) }
-val Long?.param: SqlParameter get() = { ps, pos -> this@param?.let { ps.setLong(pos, it) } ?: ps.setNull(pos, Types.BIGINT) }
-val Float?.param: SqlParameter get() = { ps, pos -> this@param?.let { ps.setFloat(pos, it) } ?: ps.setNull(pos, Types.FLOAT) }
-val Double?.param: SqlParameter get() = { ps, pos -> this@param?.let { ps.setDouble(pos, it) } ?: ps.setNull(pos, Types.DOUBLE) }
+val Boolean?.param: SqlParameter get() = { pos -> this?.let { setBoolean(pos, it) } ?: setNull(pos, Types.BOOLEAN) }
+val Byte?.param: SqlParameter get() = { pos -> this?.let { setByte(pos, it) } ?: setNull(pos, Types.TINYINT) }
+val Short?.param: SqlParameter get() = { pos -> this?.let { setShort(pos, it) } ?: setNull(pos, Types.SMALLINT) }
+val Int?.param: SqlParameter get() = { pos -> this?.let { setInt(pos, it) } ?: setNull(pos, Types.INTEGER) }
+val Long?.param: SqlParameter get() = { pos -> this?.let { setLong(pos, it) } ?: setNull(pos, Types.BIGINT) }
+val Float?.param: SqlParameter get() = { pos -> this?.let { setFloat(pos, it) } ?: setNull(pos, Types.FLOAT) }
+val Double?.param: SqlParameter get() = { pos -> this?.let { setDouble(pos, it) } ?: setNull(pos, Types.DOUBLE) }
 
-val BigDecimal?.param: SqlParameter get() = { ps, pos -> ps.setBigDecimal(pos, this@param) }
-val String?.param: SqlParameter get() = { ps, pos -> ps.setString(pos, this@param) }
-val ByteArray?.param: SqlParameter get() = { ps, pos -> ps.setBytes(pos, this@param) }
-val Instant?.param: SqlParameter get() = { ps, pos -> ps.setTimestamp(pos, this@param?.let { Timestamp(it.toEpochMilli()) }) }
-val Reader?.param: SqlParameter get() = { ps, pos -> ps.setCharacterStream(pos, this@param) }
-val InputStream?.param: SqlParameter get() = { ps, pos -> ps.setBinaryStream(pos, this@param) }
-val Ref?.param: SqlParameter get() = { ps, pos -> ps.setRef(pos, this@param) }
-val RowId?.param: SqlParameter get() = { ps, pos -> ps.setRowId(pos, this@param) }
-val String?.paramNSString: SqlParameter get() = { ps, pos -> ps.setNString(pos, this@paramNSString) }
-val Reader?.paramNsString: SqlParameter get() = { ps, pos -> ps.setNCharacterStream(pos, this@paramNsString) }
-val Blob?.param: SqlParameter get() = { ps, pos -> ps.setBlob(pos, this@param) }
-val Clob?.param: SqlParameter get() = { ps, pos -> ps.setClob(pos, this@param) }
-val NClob?.param: SqlParameter get() = { ps, pos -> ps.setNClob(pos, this@param) }
-val SQLXML?.param: SqlParameter get() = { ps, pos -> ps.setSQLXML(pos, this@param) }
+val BigDecimal?.param: SqlParameter get() = { pos -> setBigDecimal(pos, this) }
+val String?.param: SqlParameter get() = { pos -> setString(pos, this) }
+val ByteArray?.param: SqlParameter get() = { pos -> setBytes(pos, this) }
+val Instant?.param: SqlParameter get() = { pos -> setTimestamp(pos, this?.let { Timestamp(it.toEpochMilli()) }) }
+val Reader?.param: SqlParameter get() = { pos -> setCharacterStream(pos, this) }
+val InputStream?.param: SqlParameter get() = { pos -> setBinaryStream(pos, this) }
+val Ref?.param: SqlParameter get() = { pos -> setRef(pos, this) }
+val RowId?.param: SqlParameter get() = { pos -> setRowId(pos, this) }
+val String?.paramNSString: SqlParameter get() = { pos -> setNString(pos, this) }
+val Reader?.paramNsString: SqlParameter get() = { pos -> setNCharacterStream(pos, this) }
+val Blob?.param: SqlParameter get() = { pos -> setBlob(pos, this) }
+val Clob?.param: SqlParameter get() = { pos -> setClob(pos, this) }
+val NClob?.param: SqlParameter get() = { pos -> setNClob(pos, this) }
+val SQLXML?.param: SqlParameter get() = { pos -> setSQLXML(pos, this) }

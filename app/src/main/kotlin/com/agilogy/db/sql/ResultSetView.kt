@@ -8,37 +8,38 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.LocalTime
 
-class ResultSetView(private val resultSet: ResultSet) {
+context(ResultSet)
+class ResultSetView {
 
-    private fun <A> A.orNull(): A? = if (resultSet.wasNull()) null else this
+    private fun <A> A.orNull(): A? = if (wasNull()) null else this
 
-    fun string(columnIndex: Int): String? = resultSet.getString(columnIndex)
+    fun string(columnIndex: Int): String? = getString(columnIndex)
 
-    fun boolean(columnIndex: Int): Boolean? = resultSet.getBoolean(columnIndex).orNull()
+    fun boolean(columnIndex: Int): Boolean? = getBoolean(columnIndex).orNull()
 
-    fun byte(columnIndex: Int): Byte? = resultSet.getByte(columnIndex).orNull()
+    fun byte(columnIndex: Int): Byte? = getByte(columnIndex).orNull()
 
-    fun short(columnIndex: Int): Short? = resultSet.getShort(columnIndex).orNull()
+    fun short(columnIndex: Int): Short? = getShort(columnIndex).orNull()
 
-    fun int(columnIndex: Int): Int? = resultSet.getInt(columnIndex).orNull()
+    fun int(columnIndex: Int): Int? = getInt(columnIndex).orNull()
 
-    fun long(columnIndex: Int): Long? = resultSet.getLong(columnIndex).orNull()
+    fun long(columnIndex: Int): Long? = getLong(columnIndex).orNull()
 
-    fun float(columnIndex: Int): Float? = resultSet.getFloat(columnIndex).orNull()
+    fun float(columnIndex: Int): Float? = getFloat(columnIndex).orNull()
 
-    fun double(columnIndex: Int): Double? = resultSet.getDouble(columnIndex).orNull()
+    fun double(columnIndex: Int): Double? = getDouble(columnIndex).orNull()
 
-    fun bigDecimal(columnIndex: Int): BigDecimal? = resultSet.getBigDecimal(columnIndex)
+    fun bigDecimal(columnIndex: Int): BigDecimal? = getBigDecimal(columnIndex)
 
-    fun bytes(columnIndex: Int): ByteArray? = resultSet.getBytes(columnIndex)
+    fun bytes(columnIndex: Int): ByteArray? = getBytes(columnIndex)
 
-    fun date(columnIndex: Int): LocalDate? = resultSet.getDate(columnIndex)?.toLocalDate()
+    fun date(columnIndex: Int): LocalDate? = getDate(columnIndex)?.toLocalDate()
 
-    fun time(columnIndex: Int): LocalTime? = resultSet.getTime(columnIndex)?.toLocalTime()
+    fun time(columnIndex: Int): LocalTime? = getTime(columnIndex)?.toLocalTime()
 
-    fun timestamp(columnIndex: Int): Instant? = resultSet.getTimestamp(columnIndex)?.toInstant()
+    fun timestamp(columnIndex: Int): Instant? = getTimestamp(columnIndex)?.toInstant()
 
-    fun characterStream(columnIndex: Int): Reader? = resultSet.getCharacterStream(columnIndex)
+    fun characterStream(columnIndex: Int): Reader? = getCharacterStream(columnIndex)
 
-    fun binaryStream(columnIndex: Int): InputStream? = resultSet.getBinaryStream(columnIndex)
+    fun binaryStream(columnIndex: Int): InputStream? = getBinaryStream(columnIndex)
 }

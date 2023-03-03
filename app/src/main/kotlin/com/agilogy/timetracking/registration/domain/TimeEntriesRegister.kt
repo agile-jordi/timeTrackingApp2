@@ -1,5 +1,6 @@
 package com.agilogy.timetracking.registration.domain
 
-class TimeEntriesRegister(private val timeEntriesRepository: TimeEntriesRepository) {
-    suspend fun registerEntries(timeEntries: Iterable<TimeEntry>): Unit = timeEntriesRepository.save(timeEntries)
+context(TimeEntriesRepository)
+class TimeEntriesRegister {
+    suspend fun registerEntries(timeEntries: Iterable<TimeEntry>): Unit = save(timeEntries)
 }

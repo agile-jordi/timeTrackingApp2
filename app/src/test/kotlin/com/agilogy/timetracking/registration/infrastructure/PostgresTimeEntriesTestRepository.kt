@@ -7,15 +7,12 @@ import com.agilogy.timetracking.registration.domain.TimeEntry
 import com.agilogy.timetracking.user.domain.UserName
 import javax.sql.DataSource
 
-class PostgresTimeEntriesTestRepository(private val dataSource: DataSource) {
-    suspend fun getAll(): List<TimeEntry> = dataSource.sql {
+context(DataSource)
+class PostgresTimeEntriesTestRepository {
+
+    suspend fun getAll(): List<TimeEntry> = sql {
         select("SELECT user_name, project_name, start, end FROM time_entries") {
-            TimeEntry(
-                UserName(it.string(1)!!),
-                ProjectName(it.string(2)!!),
-                it.timestamp(3)!!,
-                it.timestamp(4)!!
-            )
+            TimeEntry(UserName(string(1)!!), ProjectName(string(2)!!), timestamp(3)!!, timestamp(4)!!)
         }
     }
 }

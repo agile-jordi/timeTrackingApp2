@@ -20,26 +20,20 @@ class PostgresTimeEntriesRepositoryIntegrationTest : FunSpec() {
             resourceScope {
                 val now = Instant.now()
                 val entries = listOf(
-                    TimeEntry(
-                        UserName("John Doe"),
-                        ProjectName("Agilogy School"),
-                        now,
-                        now.plus(1, ChronoUnit.HOURS)
-                    )
+                    TimeEntry(UserName("John Doe"), ProjectName("Agilogy School"), now, now.plus(1, ChronoUnit.HOURS))
                 )
                 with(dataSource("jdbc:postgresql://localhost/", "postgres", "postgres").bind()) {
                     TimeTrackingDatabaseSetUp.setUp()
                 }
 
-                val dataSource = dataSource("jdbc:postgresql://localhost/test", "postgres", "postgres").bind()
-                with(dataSource) {
+                with(dataSource("jdbc:postgresql://localhost/test", "postgres", "postgres").bind()) {
                     createTimeEntriesTable()
+                    val testee = PostgresTimeEntriesRepository()
+                    testee.save(entries)
+                    val testRepo = PostgresTimeEntriesTestRepository()
+                    val result = testRepo.getAll()
+                    assertEquals(entries, result)
                 }
-                val testee = PostgresTimeEntriesRepository(dataSource)
-                testee.save(entries)
-                val testRepo = PostgresTimeEntriesTestRepository(dataSource)
-                val result = testRepo.getAll()
-                assertEquals(entries, result)
             }
         }
     }
