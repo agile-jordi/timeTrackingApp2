@@ -1,6 +1,6 @@
 package com.agilogy.db.postgresql
 
 object PostgreSql {
-    const val DuplicateDatabase = "42P04"
-    const val UndefinedTable = "42P01"
+    const val DuplicateDatabase: String = "42P04"
+    const val UndefinedTable: String = "42P01"
 }
