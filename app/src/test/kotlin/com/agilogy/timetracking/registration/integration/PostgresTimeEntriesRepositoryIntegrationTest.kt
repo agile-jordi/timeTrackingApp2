@@ -18,7 +18,7 @@ class PostgresTimeEntriesRepositoryIntegrationTest : FunSpec() {
     init {
         test("it should save time entries") {
             resourceScope {
-                val now = Instant.now()
+                val now = Instant.now().truncatedTo(ChronoUnit.MINUTES)
                 val entries = listOf(
                     TimeEntry(UserName("John Doe"), ProjectName("Agilogy School"), now, now.plus(1, ChronoUnit.HOURS))
                 )
