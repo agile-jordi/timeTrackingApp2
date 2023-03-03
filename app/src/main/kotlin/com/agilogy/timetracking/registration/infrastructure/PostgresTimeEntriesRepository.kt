@@ -18,7 +18,7 @@ class PostgresTimeEntriesRepository : TimeEntriesRepository {
     override suspend fun save(timeEntries: Iterable<TimeEntry>) = sql {
         batchUpdate("""INSERT INTO time_entries(user_name, project_name, start, "end") VALUES (?, ?, ?, ?)""") {
             timeEntries.forEach {
-                addBatch(it.userName.param, it.projectName.param, it.start.param, it.end.param)
+                add(it.userName.param, it.projectName.param, it.start.param, it.end.param)
             }
         }.void
     }

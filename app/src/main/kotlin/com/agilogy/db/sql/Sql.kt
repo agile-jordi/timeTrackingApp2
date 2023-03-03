@@ -91,9 +91,9 @@ object Sql {
 
     context(PreparedStatement)
     class BatchUpdate {
-        fun addBatch(vararg params: SqlParameter) {
+        fun add(vararg params: SqlParameter) {
             setParameters(*params)
-            this@PreparedStatement.addBatch()
+            addBatch()
         }
     }
 
